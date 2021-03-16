@@ -18,12 +18,17 @@ namespace Oblig1
         {
             string output = String.Empty;
             
-            if (FirstName != null && LastName != null)
+            if (FirstName != null)
             {
 
-                output += $"{FirstName} {LastName} ";
+                output += $"{FirstName} ";
 
-            } 
+            }
+
+            if (LastName != null)
+            {
+                output += $"{LastName} ";
+            }
             if (Id != 0)
             {
             
