@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Oblig1
 {
-    class FamilyApp
+    public class FamilyApp
     {
         public string CommandPrompt = "Skriv en kommando, vet du ikke om noen kommandoer kan du skrive hjelp";
         public string WelcomeMessage = "Hei! Morsomt at du stakk innom! Dette er et program som er laget i C# som er verdens beste programmerings språk! We all love it!";
@@ -38,7 +38,7 @@ namespace Oblig1
             }
         }
 
-        private string MethodVis(string text)
+        public string MethodVis(string text)
         {
             var checkId = text.Substring(4);
 
@@ -51,13 +51,38 @@ namespace Oblig1
                     selectedPerson += People[i].GetDescription() + "\n";
                 }
 
-                if (People[i].Mother.Id == Int32.Parse(checkId) || People[i].Father.Id == Int32.Parse(checkId))
+                if (People[i].Mother != null)
                 {
-                    children.Add(People[i]);
-                    
+                    if (People[i].Mother.Id == Int32.Parse(checkId))
+                    {
+                        children.Add(People[i]);
+                    }
+                }
+
+                if (People[i].Father != null)
+                {
+                    if (People[i].Father.Id == Int32.Parse(checkId))
+                    {
+                        children.Add(People[i]);
+                    }
                 }
             }
 
+            if (children.Count > 0)
+            {
+                selectedPerson += "  Barn:\n    ";
+                for (var i = 0; i < children.Count; i++)
+                {
+                    if (i == children.Count - 1)
+                    {
+                        selectedPerson += children[i].FirstName + " (Id=" + children[i].Id + ")" + " Født: " + children[i].BirthYear + "\n";
+                    }
+                    else
+                    {
+                        selectedPerson += children[i].FirstName + " (Id=" + children[i].Id + ")" + " Født: " + children[i].BirthYear + "\n    ";
+                    }
+                }
+            }
             return selectedPerson;
         }
 
