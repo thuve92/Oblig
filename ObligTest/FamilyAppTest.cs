@@ -24,5 +24,20 @@ namespace ObligTest
                                    + "    Ingrid Alexandra (Id=2) Født: 2004\n";
             Assert.AreEqual(expectedResponse, actualResponse);
         }
+
+        [Test]
+        public void TestIngenBarn()
+        {
+            var sverreMagnus = new Person { Id = 1, FirstName = "Sverre Magnus", BirthYear = 2005 };
+            var haakon = new Person { Id = 3, FirstName = "Haakon Magnus", BirthYear = 1973 };
+            var metteMarit = new Person { Id = 4, FirstName = "Mette-Marit", BirthYear = 1973 };
+            sverreMagnus.Father = haakon;
+            sverreMagnus.Mother = metteMarit;
+            var app = new FamilyApp(sverreMagnus);
+            var actualResponse = app.HandleCommand("vis 1");
+            var expectedResponse = "Sverre Magnus (Id=1) Født: 2005 Far: Haakon Magnus (Id=3) Mor: Mette-Marit (Id=4)\n";
+                                  
+            Assert.AreEqual(expectedResponse, actualResponse);
+        }
     }
 }
